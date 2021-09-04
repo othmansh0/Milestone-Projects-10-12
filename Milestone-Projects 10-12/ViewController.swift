@@ -88,6 +88,19 @@ class ViewController: UITableViewController,UIImagePickerControllerDelegate,UINa
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-
+    func save(){
+        let jsonEncoder = JSONEncoder()
+        //converting items to data
+        if let savedData = try? jsonEncoder.encode(items){
+            let defaults = UserDefaults.standard
+            //saving
+            defaults.set(savedData, forKey: "items")
+        }
+        else {
+            print("Failed encoding data")
+        }
+        
+    }
+    
 }
 
