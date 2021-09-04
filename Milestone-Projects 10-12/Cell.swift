@@ -10,7 +10,7 @@ import UIKit
 class Cell: UITableViewCell {
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var caption: UILabel!
-    
+  
    
 
 }
