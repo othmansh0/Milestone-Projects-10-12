@@ -14,6 +14,15 @@ class ViewController: UITableViewController,UIImagePickerControllerDelegate,UINa
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addImage))
         
+        let decoder = JSONDecoder()
+        let defualts = UserDefaults.standard
+        if let savedData = defualts.object(forKey: "items") as? Data {
+            if let decodedData = try? decoder.decode([Item].self, from: savedData){
+                items = decodedData
+            }
+        }
+        
+        
     }
     
     
@@ -75,7 +84,7 @@ class ViewController: UITableViewController,UIImagePickerControllerDelegate,UINa
           
           
             self?.tableView.reloadData()
-            //save
+            self?.save()
             
         }
         ac.addAction(action)
