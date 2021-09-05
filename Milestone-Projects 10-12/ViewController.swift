@@ -21,7 +21,7 @@ class ViewController: UITableViewController,UIImagePickerControllerDelegate,UINa
                 items = decodedData
             }
         }
-        
+        title = "TA DA"
         
     }
     
@@ -42,6 +42,18 @@ class ViewController: UITableViewController,UIImagePickerControllerDelegate,UINa
         return cell
         
     
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController{
+            let item = items[indexPath.row]
+            let imagePath = getDocumentsDirectory().appendingPathComponent(item.name)
+            
+            
+            vc.imageName = imagePath.path
+            vc.imageCaption = item.caption
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
     }
     
     
